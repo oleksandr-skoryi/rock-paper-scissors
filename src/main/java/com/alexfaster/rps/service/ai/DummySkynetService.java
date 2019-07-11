@@ -4,7 +4,7 @@ import com.alexfaster.rps.model.Choice;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DummySkynetService {
+public class DummySkynetService implements Turnable {
 
     public Choice makeTurn() {
         final Choice[] values = Choice.values();

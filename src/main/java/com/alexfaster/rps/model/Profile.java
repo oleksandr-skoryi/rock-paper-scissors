@@ -18,6 +18,7 @@ public class Profile {
     public Profile() {
         this.wins = 0;
         this.loses = 0;
+        this.draws = 0;
         this.gameLog = new ArrayList<>();
     }
 

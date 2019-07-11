@@ -58,6 +58,8 @@ public class MakeTurnService {
         if (outcome == Outcome.LOSE) {
             profile.incrementLoses();
         }
-        profile.incrementDraws();
+        if (outcome == Outcome.DRAW) {
+            profile.incrementDraws();
+        }
     }
 }
