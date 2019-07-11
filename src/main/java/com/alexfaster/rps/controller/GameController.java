@@ -8,6 +8,7 @@ import com.alexfaster.rps.service.game.MakeTurnService;
 import com.alexfaster.rps.service.game.StartGameService;
 import com.alexfaster.rps.service.game.DiscardGameService;
 import com.alexfaster.rps.service.game.StatsService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
+@Api
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "/game", consumes = MediaType.APPLICATION_JSON_VALUE)
