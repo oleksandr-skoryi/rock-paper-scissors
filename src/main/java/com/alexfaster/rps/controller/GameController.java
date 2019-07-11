@@ -4,9 +4,9 @@ import com.alexfaster.rps.dto.ProfileDTO;
 import com.alexfaster.rps.dto.StartGameDTO;
 import com.alexfaster.rps.dto.TurnDTO;
 import com.alexfaster.rps.dto.UserChoiceDTO;
+import com.alexfaster.rps.service.game.DiscardGameService;
 import com.alexfaster.rps.service.game.MakeTurnService;
 import com.alexfaster.rps.service.game.StartGameService;
-import com.alexfaster.rps.service.game.DiscardGameService;
 import com.alexfaster.rps.service.game.StatsService;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
@@ -21,10 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
-@Api
+@Api(
+        produces = MediaType.APPLICATION_JSON_VALUE
+)
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/game", consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(
+        value = "/game",
+        produces = MediaType.APPLICATION_JSON_VALUE
+)
 public class GameController {
 
     private StartGameService startGameService;
@@ -37,7 +42,10 @@ public class GameController {
         return startGameService.startGame();
     }
 
-    @PostMapping("/makeTurn")
+    @PostMapping(
+            value = "/makeTurn",
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
     public TurnDTO makeTurn(
 
             @RequestHeader("Game-Token")
