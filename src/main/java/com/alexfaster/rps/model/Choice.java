@@ -17,6 +17,19 @@ public enum Choice implements Comparable<Choice> {
         return title;
     }
 
+    public static Choice getEnemy(final Choice choice) {
+        switch (choice) {
+            case P:
+                return S;
+            case R:
+                return P;
+            case S:
+                return R;
+            default:
+                throw new IllegalArgumentException("Unpredictable choice");
+        }
+    }
+
     public static class ChoiceComparator implements Comparator<Choice> {
 
         public int compare(final Choice o1, final Choice o2) {
