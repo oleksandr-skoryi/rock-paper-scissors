@@ -5,7 +5,6 @@ skynet:
   chain-length: 5
 
 spring:
-  profiles: development
   jpa:
     database: h2
     show-sql: true

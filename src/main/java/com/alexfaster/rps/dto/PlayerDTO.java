@@ -11,15 +11,11 @@ import java.util.List;
 @Data
 public class PlayerDTO {
 
-    private Integer wins;
-    private Integer loses;
-    private Integer draws;
+    private StatsDTO stats;
     private List<String> history;
 
     public PlayerDTO(final Player player, final List<String> messages) {
-        this.wins = player.getWins();
-        this.loses = player.getLoses();
-        this.draws = player.getDraws();
+        this.stats = new StatsDTO(player);
         this.history = Collections.unmodifiableList(messages);
     }
 }

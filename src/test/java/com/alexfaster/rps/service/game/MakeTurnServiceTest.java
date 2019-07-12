@@ -2,6 +2,7 @@ package com.alexfaster.rps.service.game;
 
 import com.alexfaster.rps.config.CurrentTimeConfig;
 import com.alexfaster.rps.dto.PlayerDTO;
+import com.alexfaster.rps.dto.StatsDTO;
 import com.alexfaster.rps.dto.TurnDTO;
 import com.alexfaster.rps.model.Account;
 import com.alexfaster.rps.model.Choice;
@@ -93,10 +94,11 @@ public class MakeTurnServiceTest {
         );
         final TurnDTO turnDTO = makeTurnService.makeTurn(EXISTED_TOKEN, Choice.P);
         Assert.assertThat(turnDTO.getOutcome(), is(Outcome.WIN));
-        final PlayerDTO playerDTO = turnDTO.getProfile();
-        Assert.assertThat(playerDTO.getWins(), is(1));
-        Assert.assertThat(playerDTO.getLoses(), is(0));
-        Assert.assertThat(playerDTO.getDraws(), is(0));
+        final PlayerDTO playerDTO = turnDTO.getPlayer();
+        final StatsDTO statsDTO = playerDTO.getStats();
+        Assert.assertThat(statsDTO.getWins(), is(1));
+        Assert.assertThat(statsDTO.getLoses(), is(0));
+        Assert.assertThat(statsDTO.getDraws(), is(0));
     }
 
     @Test
@@ -109,10 +111,11 @@ public class MakeTurnServiceTest {
         );
         final TurnDTO turnDTO = makeTurnService.makeTurn(EXISTED_TOKEN, Choice.P);
         Assert.assertThat(turnDTO.getOutcome(), is(Outcome.LOSE));
-        final PlayerDTO playerDTO = turnDTO.getProfile();
-        Assert.assertThat(playerDTO.getWins(), is(0));
-        Assert.assertThat(playerDTO.getLoses(), is(1));
-        Assert.assertThat(playerDTO.getDraws(), is(0));
+        final PlayerDTO playerDTO = turnDTO.getPlayer();
+        final StatsDTO statsDTO = playerDTO.getStats();
+        Assert.assertThat(statsDTO.getWins(), is(0));
+        Assert.assertThat(statsDTO.getLoses(), is(1));
+        Assert.assertThat(statsDTO.getDraws(), is(0));
     }
 
     @Test
@@ -125,10 +128,11 @@ public class MakeTurnServiceTest {
         );
         final TurnDTO turnDTO = makeTurnService.makeTurn(EXISTED_TOKEN, Choice.P);
         Assert.assertThat(turnDTO.getOutcome(), is(Outcome.DRAW));
-        final PlayerDTO playerDTO = turnDTO.getProfile();
-        Assert.assertThat(playerDTO.getWins(), is(0));
-        Assert.assertThat(playerDTO.getLoses(), is(0));
-        Assert.assertThat(playerDTO.getDraws(), is(1));
+        final PlayerDTO playerDTO = turnDTO.getPlayer();
+        final StatsDTO statsDTO = playerDTO.getStats();
+        Assert.assertThat(statsDTO.getWins(), is(0));
+        Assert.assertThat(statsDTO.getLoses(), is(0));
+        Assert.assertThat(statsDTO.getDraws(), is(1));
     }
 
 }
