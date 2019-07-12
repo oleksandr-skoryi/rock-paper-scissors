@@ -19,13 +19,13 @@ public class LogServiceTest {
     @Test
     public void verifyThatWinMessageIsGeneratedCorrectly() {
         final String logMessage = logService.makeLogMessage(Outcome.WIN, Choice.P, Choice.R);
-        Assert.assertThat(logMessage, is("Player WINS with PAPER against skynet ROCK"));
+        Assert.assertThat(logMessage, is("Player WINS with PAPER against Skynet ROCK"));
     }
 
     @Test
     public void verifyThatLoseMessageIsGeneratedCorrectly() {
         final String logMessage = logService.makeLogMessage(Outcome.LOSE, Choice.S, Choice.R);
-        Assert.assertThat(logMessage, is("Skynet WINS with ROCK against Player SCISSORS"));
+        Assert.assertThat(logMessage, is("Player LOSES with SCISSORS against Skynet ROCK"));
     }
 
     @Test

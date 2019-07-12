@@ -15,16 +15,16 @@ public class LogService {
         switch (outcome) {
             case WIN: {
                 return String.format(
-                        "Player WINS with %s against skynet %s",
+                        "Player WINS with %s against Skynet %s",
                         playerChoice.title(),
                         skynetChoice.title()
                 );
             }
             case LOSE: {
                 return String.format(
-                        "Skynet WINS with %s against Player %s",
-                        skynetChoice.title(),
-                        playerChoice.title()
+                        "Player LOSES with %s against Skynet %s",
+                        playerChoice.title(),
+                        skynetChoice.title()
                 );
             }
             case DRAW: {

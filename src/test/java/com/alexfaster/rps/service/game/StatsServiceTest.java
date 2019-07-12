@@ -56,8 +56,8 @@ public class StatsServiceTest {
         final ProfileDTO stats = statsService.getStats(EXISTED_TOKEN);
         Assert.assertThat(stats.getGameLog().size(), is(2));
         Assert.assertThat(stats.getGameLog(), is(Arrays.asList(
-                "Dummy Log 1",
-                "Dummy Log 2"
+                "Dummy Log 2",
+                "Dummy Log 1"
         )));
     }
 

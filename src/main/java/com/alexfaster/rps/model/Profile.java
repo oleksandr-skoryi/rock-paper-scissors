@@ -39,7 +39,7 @@ public class Profile {
     }
 
     public void addLog(final String log) {
-        gameLog.add(log);
+        gameLog.add(0, log);
     }
 
     public List<String> getGameLog() {
