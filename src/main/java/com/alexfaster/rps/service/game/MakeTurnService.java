@@ -10,23 +10,37 @@ import com.alexfaster.rps.model.Outcome;
 import com.alexfaster.rps.model.Player;
 import com.alexfaster.rps.model.TurnHistory;
 import com.alexfaster.rps.repository.AccountRepository;
-import com.alexfaster.rps.service.ai.Turnable;
-import lombok.AllArgsConstructor;
+import com.alexfaster.rps.service.ai.AIBrainable;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class MakeTurnService {
 
     private final AccountRepository accountRepository;
 
-    private final Turnable skynetService;
+    private final AIBrainable skynetService;
     private final OutcomeService outcomeService;
     private final CurrentTimeConfig currentTimeConfig;
     private final LogService logService;
+
+    public MakeTurnService(
+            final AccountRepository accountRepository,
+            @Qualifier("cleverSkynetService")
+            final AIBrainable skynetService,
+            final OutcomeService outcomeService,
+            final CurrentTimeConfig currentTimeConfig,
+            final LogService logService
+    ) {
+        this.accountRepository = accountRepository;
+        this.skynetService = skynetService;
+        this.outcomeService = outcomeService;
+        this.currentTimeConfig = currentTimeConfig;
+        this.logService = logService;
+    }
 
     @Transactional
     public TurnDTO makeTurn(

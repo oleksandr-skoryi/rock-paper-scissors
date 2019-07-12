@@ -5,7 +5,7 @@ import com.alexfaster.rps.model.Player;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DummySkynetService implements Turnable {
+public class DummySkynetService implements AIBrainable {
 
     public Choice makeTurn(final Player player) {
         final Choice[] values = Choice.values();

@@ -8,7 +8,7 @@ import com.alexfaster.rps.model.Choice;
 import com.alexfaster.rps.model.Outcome;
 import com.alexfaster.rps.model.Player;
 import com.alexfaster.rps.repository.AccountRepository;
-import com.alexfaster.rps.service.ai.Turnable;
+import com.alexfaster.rps.service.ai.AIBrainable;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class MakeTurnServiceTest {
     private AccountRepository accountRepository;
 
     @Mock
-    private Turnable skynetService;
+    private AIBrainable skynetService;
 
     @Mock
     private OutcomeService outcomeService;

@@ -1,6 +1,9 @@
 server:
   port: ${SERVER_PORT:62558}
 
+skynet:
+  chain-length: 5
+
 spring:
   profiles: development
   jpa:
