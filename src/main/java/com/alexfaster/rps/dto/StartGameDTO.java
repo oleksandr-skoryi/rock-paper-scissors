@@ -11,6 +11,4 @@ public class StartGameDTO {
 
     private String token;
 
-    private ProfileDTO profile;
-
 }

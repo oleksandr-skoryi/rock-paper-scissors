@@ -1,6 +1,5 @@
 package com.alexfaster.rps.service.game;
 
-import com.alexfaster.rps.dto.ProfileDTO;
 import com.alexfaster.rps.dto.StartGameDTO;
 import com.alexfaster.rps.model.Profile;
 import com.alexfaster.rps.repository.GameRepository;
@@ -19,10 +18,8 @@ public class StartGameService {
         final String generatedToken = generateToken();
         final Profile profile = createProfile(generatedToken);
         gameRepository.save(profile);
-        final ProfileDTO profileDTO = new ProfileDTO(profile);
         return new StartGameDTO(
-                generatedToken,
-                profileDTO
+                generatedToken
         );
     }
 
