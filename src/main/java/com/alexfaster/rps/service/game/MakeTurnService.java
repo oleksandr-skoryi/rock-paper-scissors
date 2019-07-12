@@ -1,65 +1,75 @@
 package com.alexfaster.rps.service.game;
 
-import com.alexfaster.rps.dto.ProfileDTO;
+import com.alexfaster.rps.config.CurrentTimeConfig;
+import com.alexfaster.rps.dto.PlayerDTO;
 import com.alexfaster.rps.dto.TurnDTO;
 import com.alexfaster.rps.exception.SessionNotFoundException;
+import com.alexfaster.rps.model.Account;
 import com.alexfaster.rps.model.Choice;
 import com.alexfaster.rps.model.Outcome;
-import com.alexfaster.rps.model.Profile;
-import com.alexfaster.rps.repository.GameRepository;
+import com.alexfaster.rps.model.Player;
+import com.alexfaster.rps.model.TurnHistory;
+import com.alexfaster.rps.repository.AccountRepository;
 import com.alexfaster.rps.service.ai.Turnable;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class MakeTurnService {
 
-    private GameRepository gameRepository;
+    private final AccountRepository accountRepository;
 
-    private Turnable skynetService;
-    private OutcomeService outcomeService;
-    private LogService logService;
+    private final Turnable skynetService;
+    private final OutcomeService outcomeService;
+    private final CurrentTimeConfig currentTimeConfig;
+    private final LogService logService;
 
+    @Transactional
     public TurnDTO makeTurn(
             final String token,
             final Choice playerChoice
     ) {
-        final Profile profile = gameRepository.findById(token)
+        final Player player = accountRepository.findById(token)
+                .map(Account::getPlayer)
                 .orElseThrow(() -> new SessionNotFoundException(token));
-        final Choice skynetChoice = skynetService.makeTurn();
+        final Choice skynetChoice = skynetService.makeTurn(player);
         final Outcome outcome = outcomeService.calculatePlayerOutcome(
                 playerChoice,
                 skynetChoice
         );
+        final TurnHistory turnHistory = new TurnHistory();
+        turnHistory.setCreatedAt(currentTimeConfig.getTime());
+        turnHistory.setOutcome(outcome);
+        turnHistory.setPlayerChoice(playerChoice);
+        turnHistory.setSkynetChoice(skynetChoice);
+        player.addTurnHistory(turnHistory);
         applyOutcome(
-                profile,
+                player,
                 outcome
         );
-        final String logMessage = logService.makeLogMessage(
-                outcome,
-                playerChoice,
-                skynetChoice
-        );
-        profile.addLog(logMessage);
+        final List<String> logMessages = logService.makeLogMessages(player);
         return new TurnDTO(
                 outcome,
-                new ProfileDTO(profile)
+                new PlayerDTO(player, logMessages)
         );
     }
 
     private void applyOutcome(
-            final Profile profile,
+            final Player player,
             final Outcome outcome
     ) {
         if (outcome == Outcome.WIN) {
-            profile.incrementWins();
+            player.incrementWins();
         }
         if (outcome == Outcome.LOSE) {
-            profile.incrementLoses();
+            player.incrementLoses();
         }
         if (outcome == Outcome.DRAW) {
-            profile.incrementDraws();
+            player.incrementDraws();
         }
     }
 }

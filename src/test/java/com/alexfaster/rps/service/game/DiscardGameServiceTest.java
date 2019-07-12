@@ -1,6 +1,6 @@
 package com.alexfaster.rps.service.game;
 
-import com.alexfaster.rps.repository.GameRepository;
+import com.alexfaster.rps.repository.AccountRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -16,14 +16,20 @@ public class DiscardGameServiceTest {
     private static final String TOKEN = "123";
 
     @Mock
-    private GameRepository gameRepository;
+    private AccountRepository accountRepository;
 
     @InjectMocks
     private DiscardGameService discardGameService;
 
     @Test
-    public void verifyThatGameIsDiscardedIfPlayerExist() {
+    public void verifyThatGameIsDiscardedIfAccountExist() {
         discardGameService.discardGame(TOKEN);
-        verify(gameRepository).delete(eq(TOKEN));
+        verify(accountRepository).deleteById(eq(TOKEN));
+    }
+
+    @Test
+    public void verifyThatGameDiscardedGracefullyIfAccountDoesntExist() {
+        discardGameService.discardGame(TOKEN);
+        verify(accountRepository).deleteById(eq(TOKEN));
     }
 }

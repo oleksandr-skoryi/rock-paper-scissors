@@ -1,7 +1,7 @@
 package com.alexfaster.rps.controller;
 
-import com.alexfaster.rps.dto.ProfileDTO;
-import com.alexfaster.rps.dto.StartGameDTO;
+import com.alexfaster.rps.dto.PlayerDTO;
+import com.alexfaster.rps.dto.AccountDTO;
 import com.alexfaster.rps.dto.TurnDTO;
 import com.alexfaster.rps.dto.UserChoiceDTO;
 import com.alexfaster.rps.service.game.DiscardGameService;
@@ -39,7 +39,7 @@ public class GameController {
     private StatsService statsService;
 
     @PostMapping("/start")
-    public StartGameDTO startGame() {
+    public AccountDTO startGame() {
         return startGameService.startGame();
     }
 
@@ -75,7 +75,7 @@ public class GameController {
     }
 
     @GetMapping("/stats")
-    public ProfileDTO getStats(
+    public PlayerDTO getStats(
 
             @RequestHeader("Game-Token")
             @NotBlank

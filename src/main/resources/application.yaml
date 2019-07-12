@@ -1,3 +1,11 @@
 server:
   port: ${SERVER_PORT:62558}
 
+spring:
+  profiles: development
+  jpa:
+    database: h2
+    show-sql: true
+  datasource:
+    initialization-mode: embedded
+    platform: h2

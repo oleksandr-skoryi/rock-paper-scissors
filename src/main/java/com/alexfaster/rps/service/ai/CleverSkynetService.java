@@ -5,11 +5,11 @@ import com.alexfaster.rps.model.Player;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DummySkynetService implements Turnable {
+public class CleverSkynetService {
 
+//    @Override
     public Choice makeTurn(final Player player) {
-        final Choice[] values = Choice.values();
-        final int randomChoice = (int)(Math.random() * values.length);
-        return values[randomChoice];
+
+        return null;
     }
 }

@@ -12,5 +12,5 @@ public class TurnDTO {
 
     private Outcome outcome;
 
-    private ProfileDTO profile;
+    private PlayerDTO profile;
 }

@@ -1,9 +1,11 @@
 package com.alexfaster.rps.service.game;
 
-import com.alexfaster.rps.dto.ProfileDTO;
+import com.alexfaster.rps.dto.PlayerDTO;
 import com.alexfaster.rps.exception.SessionNotFoundException;
-import com.alexfaster.rps.model.Profile;
-import com.alexfaster.rps.repository.GameRepository;
+import com.alexfaster.rps.model.Account;
+import com.alexfaster.rps.model.Player;
+import com.alexfaster.rps.model.TurnHistory;
+import com.alexfaster.rps.repository.AccountRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -29,7 +31,10 @@ public class StatsServiceTest {
     private static final String INVALID_TOKEN = "987";
 
     @Mock
-    private GameRepository gameRepository;
+    private AccountRepository accountRepository;
+
+    @Mock
+    private LogService logService;
 
     @InjectMocks
     private StatsService statsService;
@@ -39,23 +44,35 @@ public class StatsServiceTest {
 
     @Before
     public void init() {
-        final Profile p = new Profile();
-        p.assignToken(EXISTED_TOKEN);
-        p.addLog("Dummy Log 1");
-        p.addLog("Dummy Log 2");
+        final Player p = new Player();
+        final Account a = new Account();
+        a.setToken(EXISTED_TOKEN);
+        a.setPlayer(p);
+        p.addTurnHistory(Mockito.mock(TurnHistory.class));
+        p.addTurnHistory(Mockito.mock(TurnHistory.class));
+
         Mockito.when(
-                gameRepository.findById(anyString())
+                accountRepository.findById(anyString())
         ).thenReturn(Optional.empty());
+
         Mockito.when(
-                gameRepository.findById(eq(EXISTED_TOKEN))
-        ).thenReturn(Optional.of(p));
+                accountRepository.findById(eq(EXISTED_TOKEN))
+        ).thenReturn(Optional.of(a));
+
+        Mockito.when(logService.makeLogMessages(eq(p)))
+                .thenReturn(
+                        Arrays.asList(
+                                "Dummy Log 2",
+                                "Dummy Log 1"
+                        )
+                );
     }
 
     @Test
     public void verifyThatStatsAssembled() {
-        final ProfileDTO stats = statsService.getStats(EXISTED_TOKEN);
-        Assert.assertThat(stats.getGameLog().size(), is(2));
-        Assert.assertThat(stats.getGameLog(), is(Arrays.asList(
+        final PlayerDTO stats = statsService.getStats(EXISTED_TOKEN);
+        Assert.assertThat(stats.getHistory().size(), is(2));
+        Assert.assertThat(stats.getHistory(), is(Arrays.asList(
                 "Dummy Log 2",
                 "Dummy Log 1"
         )));
