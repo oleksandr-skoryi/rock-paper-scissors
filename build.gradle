@@ -6,7 +6,7 @@ plugins {
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.alexfaster'
-version = '2.0'
+version = '3.0'
 sourceCompatibility = '1.8'
 
 configurations {
