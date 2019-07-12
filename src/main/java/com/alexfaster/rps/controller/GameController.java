@@ -11,6 +11,7 @@ import com.alexfaster.rps.service.game.StatsService;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,7 +63,7 @@ public class GameController {
         );
     }
 
-    @PostMapping("/discard")
+    @DeleteMapping("/discard")
     public void discardGame(
 
             @RequestHeader("Game-Token")
