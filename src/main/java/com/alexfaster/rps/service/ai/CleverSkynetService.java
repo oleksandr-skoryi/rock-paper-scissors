@@ -1,5 +1,6 @@
 package com.alexfaster.rps.service.ai;
 
+import com.alexfaster.rps.config.SkynetConfiguration;
 import com.alexfaster.rps.model.Choice;
 import com.alexfaster.rps.model.Player;
 import com.alexfaster.rps.model.TurnHistory;
@@ -14,11 +15,14 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CleverSkynetService implements AIBrainable {
 
+    private final SkynetConfiguration skynetConfiguration;
+
     @Override
     public Choice makeTurn(final Player player) {
         final List<Choice> playerChoices = player.getTurnHistory()
                 .stream()
                 .sorted(Comparator.comparing(TurnHistory::getCreatedAt))
+                .limit(skynetConfiguration.getChainLength())
                 .map(TurnHistory::getPlayerChoice)
                 .collect(Collectors.toList());
         if (playerChoices.isEmpty()) {

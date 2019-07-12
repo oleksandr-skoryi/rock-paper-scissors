@@ -71,7 +71,7 @@ public class Player {
 
     public void addTurnHistory(final TurnHistory turn) {
         turn.setPlayer(this);
-        turnHistory.add(turn);
+        turnHistory.add(0, turn);
     }
 
 }
