@@ -4,10 +4,14 @@ import com.alexfaster.rps.config.SkynetConfiguration;
 import com.alexfaster.rps.model.Choice;
 import com.alexfaster.rps.model.Player;
 import com.alexfaster.rps.model.TurnHistory;
+import com.alexfaster.rps.repository.TurnHistoryRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,18 +20,29 @@ import java.util.stream.Collectors;
 public class CleverSkynetService implements AIBrainable {
 
     private final SkynetConfiguration skynetConfiguration;
+    private final TurnHistoryRepository turnHistoryRepository;
 
     @Override
     public Choice makeTurn(final Player player) {
-        final List<Choice> playerChoices = player.getTurnHistory()
+        final Pageable page = PageRequest.of(
+                0,
+                skynetConfiguration.getChainLength(),
+                Sort.Direction.DESC,
+                "createdAt"
+        );
+        final List<TurnHistory> lastTurnsChain = turnHistoryRepository.findByPlayer(
+                player,
+                page
+        );
+
+        final List<Choice> playerChoices = lastTurnsChain
                 .stream()
-                .sorted(Comparator.comparing(TurnHistory::getCreatedAt))
-                .limit(skynetConfiguration.getChainLength())
                 .map(TurnHistory::getPlayerChoice)
                 .collect(Collectors.toList());
         if (playerChoices.isEmpty()) {
             return doRandomChoice();
         }
+        Collections.reverse(playerChoices);
         return doCleverChoice(playerChoices);
     }
 
@@ -58,7 +73,7 @@ public class CleverSkynetService implements AIBrainable {
     private Choice findMostProbableTransition(final int[] enemyRow) {
         int maxIndex = 0;
         for (int i = 1; i < enemyRow.length; i++) {
-            if (enemyRow[i] > enemyRow[maxIndex] ) {
+            if (enemyRow[i] > enemyRow[maxIndex]) {
                 maxIndex = i;
             }
         }
