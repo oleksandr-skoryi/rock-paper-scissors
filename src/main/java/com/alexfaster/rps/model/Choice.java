@@ -3,19 +3,7 @@ package com.alexfaster.rps.model;
 import java.util.Comparator;
 
 public enum Choice implements Comparable<Choice> {
-    R("ROCK"),
-    P("PAPER"),
-    S("SCISSORS");
-
-    private String title;
-
-    Choice(final String title) {
-        this.title = title;
-    }
-
-    public String title() {
-        return title;
-    }
+    R, P, S;
 
     public static Choice getEnemy(final Choice choice) {
         switch (choice) {
