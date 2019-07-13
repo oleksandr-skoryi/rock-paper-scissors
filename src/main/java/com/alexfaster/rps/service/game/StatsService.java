@@ -23,7 +23,6 @@ public class StatsService {
         final Player player = accountRepository.findById(token)
                 .map(Account::getPlayer)
                 .orElseThrow(() -> new SessionNotFoundException(token));
-        final List<String> logMessages = logService.makeLogMessages(player);
-        return new PlayerDTO(player, logMessages);
+        return new PlayerDTO(player);
     }
 }

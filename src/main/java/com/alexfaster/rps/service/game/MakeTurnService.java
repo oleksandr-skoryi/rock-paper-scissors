@@ -1,6 +1,7 @@
 package com.alexfaster.rps.service.game;
 
 import com.alexfaster.rps.config.CurrentTimeConfig;
+import com.alexfaster.rps.dto.OutcomeDTO;
 import com.alexfaster.rps.dto.PlayerDTO;
 import com.alexfaster.rps.dto.TurnDTO;
 import com.alexfaster.rps.exception.SessionNotFoundException;
@@ -65,11 +66,12 @@ public class MakeTurnService {
                 player,
                 outcome
         );
-        final List<String> logMessages = logService.makeLogMessages(player);
-        return new TurnDTO(
+        final OutcomeDTO outcomeDTO = new OutcomeDTO(
                 outcome,
-                new PlayerDTO(player, logMessages)
+                playerChoice,
+                skynetChoice
         );
+        return new TurnDTO(outcomeDTO);
     }
 
     private void applyOutcome(

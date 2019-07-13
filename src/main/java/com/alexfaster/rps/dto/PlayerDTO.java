@@ -4,18 +4,21 @@ import com.alexfaster.rps.model.Player;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @Data
 public class PlayerDTO {
 
     private StatsDTO stats;
-    private List<String> history;
+    private List<OutcomeDTO> history;
 
-    public PlayerDTO(final Player player, final List<String> messages) {
+    public PlayerDTO(final Player player) {
         this.stats = new StatsDTO(player);
-        this.history = Collections.unmodifiableList(messages);
+        this.history = player.getTurnHistory()
+                .stream()
+                .map(OutcomeDTO::new)
+                .collect(Collectors.toList());
     }
 }
