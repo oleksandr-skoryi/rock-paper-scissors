@@ -33,9 +33,6 @@ public class StatsServiceTest {
     @Mock
     private AccountRepository accountRepository;
 
-    @Mock
-    private LogService logService;
-
     @InjectMocks
     private StatsService statsService;
 
@@ -58,24 +55,12 @@ public class StatsServiceTest {
         Mockito.when(
                 accountRepository.findById(eq(EXISTED_TOKEN))
         ).thenReturn(Optional.of(a));
-
-        Mockito.when(logService.makeLogMessages(eq(p)))
-                .thenReturn(
-                        Arrays.asList(
-                                "Dummy Log 2",
-                                "Dummy Log 1"
-                        )
-                );
     }
 
     @Test
     public void verifyThatStatsAssembled() {
         final PlayerDTO stats = statsService.getStats(EXISTED_TOKEN);
         Assert.assertThat(stats.getHistory().size(), is(2));
-        Assert.assertThat(stats.getHistory(), is(Arrays.asList(
-                "Dummy Log 2",
-                "Dummy Log 1"
-        )));
     }
 
     @Test

@@ -9,14 +9,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @AllArgsConstructor
 public class StatsService {
 
     private final AccountRepository accountRepository;
-    private final LogService logService;
 
     @Transactional
     public PlayerDTO getStats(final String token) {

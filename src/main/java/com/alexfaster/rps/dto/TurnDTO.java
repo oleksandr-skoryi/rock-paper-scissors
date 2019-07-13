@@ -11,4 +11,6 @@ public class TurnDTO {
 
     private OutcomeDTO outcome;
 
+    private StatsDTO stats;
+
 }

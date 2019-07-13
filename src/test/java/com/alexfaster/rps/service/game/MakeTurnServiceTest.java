@@ -1,7 +1,6 @@
 package com.alexfaster.rps.service.game;
 
 import com.alexfaster.rps.config.CurrentTimeConfig;
-import com.alexfaster.rps.dto.PlayerDTO;
 import com.alexfaster.rps.dto.StatsDTO;
 import com.alexfaster.rps.dto.TurnDTO;
 import com.alexfaster.rps.model.Account;
@@ -41,9 +40,6 @@ public class MakeTurnServiceTest {
     private OutcomeService outcomeService;
 
     @Mock
-    private LogService logService;
-
-    @Mock
     private CurrentTimeConfig currentTimeConfig;
 
     @InjectMocks
@@ -78,9 +74,6 @@ public class MakeTurnServiceTest {
                 Mockito.any(Choice.class),
                 Mockito.any(Choice.class)
         );
-        Mockito.verify(logService).makeLogMessages(
-                any(Player.class)
-        );
     }
 
 
@@ -93,9 +86,8 @@ public class MakeTurnServiceTest {
                 Outcome.WIN
         );
         final TurnDTO turnDTO = makeTurnService.makeTurn(EXISTED_TOKEN, Choice.P);
-        Assert.assertThat(turnDTO.getOutcome(), is(Outcome.WIN));
-        final PlayerDTO playerDTO = turnDTO.getPlayer();
-        final StatsDTO statsDTO = playerDTO.getStats();
+        Assert.assertThat(turnDTO.getOutcome().getOutcome(), is(Outcome.WIN));
+        final StatsDTO statsDTO = turnDTO.getStats();
         Assert.assertThat(statsDTO.getWins(), is(1));
         Assert.assertThat(statsDTO.getLoses(), is(0));
         Assert.assertThat(statsDTO.getDraws(), is(0));
@@ -110,9 +102,8 @@ public class MakeTurnServiceTest {
                 Outcome.LOSE
         );
         final TurnDTO turnDTO = makeTurnService.makeTurn(EXISTED_TOKEN, Choice.P);
-        Assert.assertThat(turnDTO.getOutcome(), is(Outcome.LOSE));
-        final PlayerDTO playerDTO = turnDTO.getPlayer();
-        final StatsDTO statsDTO = playerDTO.getStats();
+        Assert.assertThat(turnDTO.getOutcome().getOutcome(), is(Outcome.LOSE));
+        final StatsDTO statsDTO = turnDTO.getStats();
         Assert.assertThat(statsDTO.getWins(), is(0));
         Assert.assertThat(statsDTO.getLoses(), is(1));
         Assert.assertThat(statsDTO.getDraws(), is(0));
@@ -127,9 +118,8 @@ public class MakeTurnServiceTest {
                 Outcome.DRAW
         );
         final TurnDTO turnDTO = makeTurnService.makeTurn(EXISTED_TOKEN, Choice.P);
-        Assert.assertThat(turnDTO.getOutcome(), is(Outcome.DRAW));
-        final PlayerDTO playerDTO = turnDTO.getPlayer();
-        final StatsDTO statsDTO = playerDTO.getStats();
+        Assert.assertThat(turnDTO.getOutcome().getOutcome(), is(Outcome.DRAW));
+        final StatsDTO statsDTO = turnDTO.getStats();
         Assert.assertThat(statsDTO.getWins(), is(0));
         Assert.assertThat(statsDTO.getLoses(), is(0));
         Assert.assertThat(statsDTO.getDraws(), is(1));
