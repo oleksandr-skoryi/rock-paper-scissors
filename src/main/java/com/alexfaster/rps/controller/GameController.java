@@ -11,6 +11,7 @@ import com.alexfaster.rps.service.game.StatsService;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ import javax.validation.constraints.NotBlank;
 @Api(
         produces = MediaType.APPLICATION_JSON_VALUE
 )
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 @RequestMapping(
