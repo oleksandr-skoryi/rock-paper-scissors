@@ -2,7 +2,6 @@ package com.alexfaster.rps.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,7 +19,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@ToString
 public class Player {
 
     @Id
@@ -36,12 +34,10 @@ public class Player {
     @Column(nullable = false)
     private Integer draws;
 
-    @ToString.Exclude
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
-    @ToString.Exclude
     @OneToMany(
             mappedBy = "player",
             cascade = CascadeType.ALL,

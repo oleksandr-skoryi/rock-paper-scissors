@@ -17,7 +17,7 @@ public class OutcomeServiceTest {
     private OutcomeService outcomeService;
 
     @Test
-    public void verifyWin() {
+    public void verifyWinPR() {
         final Outcome outcome = outcomeService.calculatePlayerOutcome(
                 Choice.P,
                 Choice.R
@@ -26,7 +26,25 @@ public class OutcomeServiceTest {
     }
 
     @Test
-    public void verifyLose() {
+    public void verifyWinRS() {
+        final Outcome outcome = outcomeService.calculatePlayerOutcome(
+                Choice.R,
+                Choice.S
+        );
+        Assert.assertThat(outcome, is(Outcome.WIN));
+    }
+
+    @Test
+    public void verifyWinSP() {
+        final Outcome outcome = outcomeService.calculatePlayerOutcome(
+                Choice.S,
+                Choice.P
+        );
+        Assert.assertThat(outcome, is(Outcome.WIN));
+    }
+
+    @Test
+    public void verifyLoseSR() {
         final Outcome outcome = outcomeService.calculatePlayerOutcome(
                 Choice.S,
                 Choice.R
@@ -35,10 +53,46 @@ public class OutcomeServiceTest {
     }
 
     @Test
-    public void verifyDraw() {
+    public void verifyLoseRP() {
+        final Outcome outcome = outcomeService.calculatePlayerOutcome(
+                Choice.R,
+                Choice.P
+        );
+        Assert.assertThat(outcome, is(Outcome.LOSE));
+    }
+
+    @Test
+    public void verifyLosePS() {
+        final Outcome outcome = outcomeService.calculatePlayerOutcome(
+                Choice.P,
+                Choice.S
+        );
+        Assert.assertThat(outcome, is(Outcome.LOSE));
+    }
+
+    @Test
+    public void verifyDrawSS() {
         final Outcome outcome = outcomeService.calculatePlayerOutcome(
                 Choice.S,
                 Choice.S
+        );
+        Assert.assertThat(outcome, is(Outcome.DRAW));
+    }
+
+    @Test
+    public void verifyDrawPP() {
+        final Outcome outcome = outcomeService.calculatePlayerOutcome(
+                Choice.P,
+                Choice.P
+        );
+        Assert.assertThat(outcome, is(Outcome.DRAW));
+    }
+
+    @Test
+    public void verifyDrawRR() {
+        final Outcome outcome = outcomeService.calculatePlayerOutcome(
+                Choice.R,
+                Choice.R
         );
         Assert.assertThat(outcome, is(Outcome.DRAW));
     }
