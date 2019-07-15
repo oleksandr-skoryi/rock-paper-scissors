@@ -17,7 +17,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 import static org.hamcrest.core.Is.is;
@@ -30,14 +29,14 @@ public class StatsServiceTest {
     private static final String EXISTED_TOKEN = "123";
     private static final String INVALID_TOKEN = "987";
 
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
     @Mock
     private AccountRepository accountRepository;
 
     @InjectMocks
     private StatsService statsService;
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void init() {

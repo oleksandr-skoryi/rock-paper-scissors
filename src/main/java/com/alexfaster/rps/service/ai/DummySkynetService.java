@@ -9,7 +9,7 @@ public class DummySkynetService implements AIBrainable {
 
     public Choice makeTurn(final Player player) {
         final Choice[] values = Choice.values();
-        final int randomChoice = (int)(Math.random() * values.length);
+        final int randomChoice = (int) (Math.random() * values.length);
         return values[randomChoice];
     }
 }
