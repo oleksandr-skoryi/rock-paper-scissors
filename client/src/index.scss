@@ -1,0 +1,23 @@
+body,
+html,
+#root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Bahianita', cursive;
+}
+
+* {
+  font-family: 'Bahianita', cursive;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+  border: 5px solid #8D6A4C;
+  border-radius: 24px;
+  background-color: #b7ab9a;
+  font-size: 45px;
+  padding: 12px 60px;
+  color: #504332;
+}

@@ -1,0 +1,26 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background-color: #362918;
+}
+
+.container {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.game {
+    min-height: 800px;
+    min-width: 1000px;
+    background-image: url('resources/img/table.png');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    &__start {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

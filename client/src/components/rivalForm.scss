@@ -1,0 +1,14 @@
+.rival-gropup {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    text-align: center;
+    .button {
+        &:hover {
+            transform: none;
+        }
+        &_active {
+            transform: translateY(20px);
+        }
+    }
+}
