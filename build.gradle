@@ -1,38 +1,18 @@
+
 plugins {
-    id 'org.springframework.boot' version '2.1.6.RELEASE'
+    id 'base'
     id 'java'
 }
 
-apply plugin: 'io.spring.dependency-management'
+allprojects {
 
-group = 'com.alexfaster'
-version = '1.0'
-sourceCompatibility = '1.8'
+    group = 'com.alexfaster'
+    version = '1.0'
 
-configurations {
-    developmentOnly
-    runtimeClasspath {
-        extendsFrom developmentOnly
-    }
-    compileOnly {
-        extendsFrom annotationProcessor
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
-    runtimeOnly 'com.h2database:h2'
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-
-}
