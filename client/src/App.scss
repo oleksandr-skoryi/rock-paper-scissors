@@ -4,14 +4,11 @@
     align-items: flex-start;
 }
 
-//.container {
-//    max-width: 980px;
-//    margin: 0 auto;
-//}
-
 .game {
     width: 100%;
     position: relative;
+    margin: 0 auto;
+    max-width: 1000px;
     &__start {
         position: absolute;
         top: 50%;
