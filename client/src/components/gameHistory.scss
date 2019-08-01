@@ -1,16 +1,15 @@
 .game-history {
     border: 5px solid #8D6A4C;
-    width: 400px;
     background-color: #F6DBBE;
     font-size: 25px;
-    width: 100%;
-    position: relative;
+    width: calc(100% - 10px);
+    position: absolute;
+    height: 80px;
+    border-bottom: none;
     &_open {
-        position: absolute;
         top: auto;
         bottom: 46px;
         height: 75%;
-        width: calc(100% - 10px);
     }
     &__table {
         width: 100%;
@@ -22,7 +21,7 @@
         background-color: #8D6A4C;
         position: absolute;
         right: 5px;
-        top: 0;
+        bottom: 22px;
         width: 36px;
         height: 36px;
         padding: 0;
