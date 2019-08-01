@@ -1,10 +1,18 @@
 import './gameHistory.scss';
-import React from 'react';
+import React, {useState} from 'react';
 
 export const GameHistory = ({ gameHistory }) => {
-    const { wins, loses, draws } = gameHistory.stats;
+    const [tableOpen, setTableOpen] = useState(false);
+    const { history } = gameHistory;
 
-    return <div className='game-history'>
+    let gameTable = history;
+    if (!tableOpen && history.length) {
+        gameTable = [history[history.length - 1]];
+    }
+    
+    const classes = `game-history ${tableOpen ? 'game-history_open' : null}`;
+
+    return <div className={classes}>
         <table className='game-history__table'>
             <thead>
                 <tr>
@@ -14,7 +22,7 @@ export const GameHistory = ({ gameHistory }) => {
                 </tr>
             </thead>
             <tbody>
-                {gameHistory.history.map((it, index) => <tr key={index}>
+                {gameTable.map((it, index) => <tr key={index}>
                     <td>{it.playerChoice}</td>
                     <td>{it.skynetChoice}</td>
                     <td>{it.outcome}</td>
@@ -22,10 +30,6 @@ export const GameHistory = ({ gameHistory }) => {
                 )}
             </tbody>
         </table>
-        <div className='game-history__results'>
-            <p>Wins: {wins}</p>
-            <p>Loses: {loses}</p>
-            <p>Draws: {draws}</p>
-        </div>
+        <button className='game-history__table-open' onClick={() => setTableOpen((tableOpen) => !tableOpen)}></button>
     </div>
 }

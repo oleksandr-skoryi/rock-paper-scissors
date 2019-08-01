@@ -1,15 +1,31 @@
 .game-history {
-    position: fixed;
-    right: 0;
-    bottom: 0;
     border: 5px solid #8D6A4C;
     width: 400px;
     background-color: #F6DBBE;
     font-size: 25px;
-    height: 60vh;
-    overflow: auto;
+    width: 100%;
+    position: relative;
+    &_open {
+        position: absolute;
+        top: auto;
+        bottom: 0;
+        height: 75%;
+        width: calc(100% - 12px);
+    }
     &__table {
         width: 100%;
+        th {
+            text-align: left;
+        }
+    }
+    &__table-open {
+        background-color: #8D6A4C;
+        position: absolute;
+        right: 5px;
+        top: 0;
+        width: 36px;
+        height: 36px;
+        padding: 0;
     }
     tbody {
         max-height: 50vh;
