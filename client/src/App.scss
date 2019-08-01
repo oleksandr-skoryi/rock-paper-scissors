@@ -11,8 +11,7 @@
 }
 
 .game {
-    max-height: 800px;
-    height: 100%;
+    height: calc(100% - 46px);
     max-width: 1000px;
     width: 100%;
     position: relative;
