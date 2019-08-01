@@ -1,29 +1,22 @@
 .button-group {
     display: flex;
-    align-items: center;
+    //align-items: center;
     justify-content: center;
-
     .button {
         margin: 0 10px;
         transition: 0.2s ease;
-
         &:hover,
         &_active {
             transform: translateY(-40px);
         }
-
-
-
         &_disable {
             opacity: 0.7;
             pointer-events: none;
             cursor: not-allowed;
         }
-
         &_active {
             opacity: 1;
         }
-
         img {
             box-shadow: 6px 7px 14px #074554;
         }
@@ -31,10 +24,10 @@
 }
 
 .player-gropup {
-    position: absolute;
-    bottom: 40px;
     width: 100%;
     text-align: center;
+    padding-bottom: 32px;
+    align-items: flex-end;
 }
 
 .button {

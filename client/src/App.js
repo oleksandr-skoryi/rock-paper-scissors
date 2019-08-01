@@ -66,14 +66,14 @@ function App() {
   const stats = currentHistory.stats;
 
   return <div className='wrapper'>
-    {gameStart ? <GameFinalResult stats={stats} /> : null}
+    {!gameStart ? <Button className='game__start' onClick={startGame}>Start Game</Button> : null}
     <div className='container game'>
       <div className='game__board'>
-        {!gameStart ? <Button className='game__start' onClick={startGame}>Start Game</Button> : null}
         {gameStart ? <GamePhase makeTurn={makeTurn} currentHistory={currentHistory} playersResult={playersResult} /> : null}
       </div>
       <div className='game-phase__result'>
         {gameStart ? <GameHistory gameHistory={currentHistory} /> : null}
+        {gameStart ? <GameFinalResult stats={stats} /> : null}
       </div>
     </div>
   </div>;

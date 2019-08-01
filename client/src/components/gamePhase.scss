@@ -1,4 +1,7 @@
 .game-phase {
+    display: flex;
+    height: 100%;
+    flex-wrap: wrap;
     &__result {
         display: flex;
         flex-wrap: wrap;

@@ -25,8 +25,8 @@ const buttons = [{
 
 export const GamePhase = ({ makeTurn, playersResult }) => {
     return <div className='game-phase'>
-        <GameForm buttons={buttons} makeTurn={makeTurn} playerChoice={playersResult.playerChoice} />
         {playersResult.outcome ? <GameResult outcome={playersResult.outcome} /> : null}
         <RivalForm buttons={buttons} skynetChoice={playersResult.skynetChoice} />
+        <GameForm buttons={buttons} makeTurn={makeTurn} playerChoice={playersResult.playerChoice} />
     </div>
 }
