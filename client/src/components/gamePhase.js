@@ -29,4 +29,4 @@ export const GamePhase = ({ makeTurn, playersResult }) => {
         <RivalForm buttons={buttons} skynetChoice={playersResult.skynetChoice} />
         <GameForm buttons={buttons} makeTurn={makeTurn} playerChoice={playersResult.playerChoice} />
     </div>
-}
+};

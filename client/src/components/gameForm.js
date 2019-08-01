@@ -12,4 +12,4 @@ export const GameForm = ({ makeTurn, playerChoice, buttons }) => {
             </Button>
         })}
     </div>
-}
+};

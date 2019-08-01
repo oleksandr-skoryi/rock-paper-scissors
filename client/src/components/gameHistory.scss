@@ -1,14 +1,14 @@
 .game-history {
-    border: 5px solid #8D6A4C;
     background-color: #F6DBBE;
     font-size: 25px;
-    width: calc(100% - 10px);
+    width: 100%;
     position: absolute;
     height: 80px;
-    border-bottom: none;
+    border-top: 5px solid #8D6A4C;
+    border-bottom: 5px solid #8D6A4C;
     &_open {
         top: auto;
-        bottom: 46px;
+        bottom: 35px;
         height: 75%;
     }
     &__table {

@@ -16,4 +16,4 @@ export const GameResult = ({ outcome }) => {
     return <div className='game-result'>
         <h2>{message}</h2>
     </div>
-}
+};

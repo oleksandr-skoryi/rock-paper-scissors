@@ -9,7 +9,7 @@ export const GameHistory = ({ gameHistory }) => {
     if (!tableOpen && history.length) {
         gameTable = [history[history.length - 1]];
     }
-    
+
     const classes = `game-history ${tableOpen ? 'game-history_open' : null}`;
 
     return <div className={classes}>
@@ -30,6 +30,6 @@ export const GameHistory = ({ gameHistory }) => {
                 )}
             </tbody>
         </table>
-        <button className='game-history__table-open' onClick={() => setTableOpen((tableOpen) => !tableOpen)}></button>
+        <button className='game-history__table-open' onClick={() => setTableOpen((tableOpen) => !tableOpen)}/>
     </div>
-}
+};

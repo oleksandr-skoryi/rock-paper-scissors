@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from './button';
 
 export const RivalForm = ({ buttons, skynetChoice }) => {
-    return <div className='button-group rival-gropup'>
+    return <div className='button-group rival-group'>
         {buttons.map((it, index) => {
             const classes = skynetChoice === it.value ? 'button_active' : '';
             const classesRound = skynetChoice ? 'button_disable' : '';
@@ -12,4 +12,4 @@ export const RivalForm = ({ buttons, skynetChoice }) => {
             </Button>
         })}
     </div>
-}
+};

@@ -4,13 +4,12 @@
     align-items: flex-start;
 }
 
-.container {
-    max-width: 980px;
-    margin: 0 auto;
-}
+//.container {
+//    max-width: 980px;
+//    margin: 0 auto;
+//}
 
 .game {
-    max-width: 1000px;
     width: 100%;
     position: relative;
     &__start {
@@ -22,11 +21,20 @@
     }
 
     &__board {
-        background-image: url('resources/img/table.png');
+        background-image: url('resources/img/table_without_borders.png');
         background-position: center;
         background-size: cover;
         position: relative;
         width: 100%;
-        height: calc(100vh - 126px);
+        height: 100vh;
+
+        &__started {
+            background-image: url('resources/img/table_without_borders.png');
+            background-position: center;
+            background-size: cover;
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 126px);
+        }
     }
 }

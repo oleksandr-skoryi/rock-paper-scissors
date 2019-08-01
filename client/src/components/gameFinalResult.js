@@ -9,4 +9,4 @@ export const GameFinalResult = ({ stats }) => {
         <p>Loses: {loses}</p>
         <p>Draws: {draws}</p>
     </div>
-}
+};
