@@ -60,7 +60,7 @@ public class CleverAITest {
                 .filter(outcome -> outcome == Outcome.WIN)
                 .count();
 
-        Assert.assertThat(winsAmount, not(greaterThan(1L)));
+        Assert.assertThat(winsAmount, not(greaterThan(2L)));
 
     }
 }

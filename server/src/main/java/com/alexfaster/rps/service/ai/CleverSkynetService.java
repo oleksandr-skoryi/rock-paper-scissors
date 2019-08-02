@@ -11,9 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 @AllArgsConstructor
@@ -71,12 +73,18 @@ public class CleverSkynetService implements AIBrainable {
     }
 
     private Choice findMostProbableTransition(final int[] enemyRow) {
-        int maxIndex = 0;
-        for (int i = 1; i < enemyRow.length; i++) {
-            if (enemyRow[i] > enemyRow[maxIndex]) {
-                maxIndex = i;
-            }
-        }
+        final int maxValue = Arrays.stream(enemyRow)
+                .max()
+                .orElseThrow(() -> new IllegalArgumentException("Empty array is not expected"));
+
+        final int[] maxIndexes = IntStream.range(0, enemyRow.length)
+                .filter(index -> enemyRow[index] == maxValue)
+                .toArray();
+
+        final int randomIndex = (int) (Math.random() * maxIndexes.length);
+
+        final int maxIndex = maxIndexes[randomIndex];
+
         return Choice.values()[maxIndex];
     }
 
