@@ -10,7 +10,11 @@ const GAME_INTERVAL = 2222;
 
 function App() {
   const [gameHistory, setGameHistory] = useState({
-    stats: {},
+    stats: {
+      wins: 0,
+      loses: 0,
+      draws: 0
+    },
     history: []
   });
   const [gameStart, setGameStart] = useState(false);

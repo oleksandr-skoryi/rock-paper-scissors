@@ -7,7 +7,12 @@
     margin-top: 90px;
     position: relative;
     p {
-        padding-right: 14px;
         margin: 0;
+    }
+    justify-content: space-around;
+
+    .score {
+        width: 33.3%;
+        text-align: center;
     }
 }

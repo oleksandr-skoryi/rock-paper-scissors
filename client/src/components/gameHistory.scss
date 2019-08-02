@@ -13,8 +13,12 @@
     }
     &__table {
         width: 100%;
+        text-align: center;
         th {
-            text-align: left;
+            text-transform: uppercase;
+        }
+        td {
+            font-size: 22px;
         }
     }
     &__table-open {

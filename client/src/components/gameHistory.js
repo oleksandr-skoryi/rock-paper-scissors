@@ -12,6 +12,15 @@ export const GameHistory = ({ gameHistory }) => {
 
     const classes = `game-history ${tableOpen ? 'game-history_open' : null}`;
 
+    const choiceConverter = (choice) => {
+        switch(choice) {
+            case 'R': return 'Rock';
+            case 'S': return 'Scissors';
+            case 'P': return 'Paper';
+            default: return '';
+        }
+    };
+
     return <div className={classes}>
         <table className='game-history__table'>
             <thead>
@@ -23,8 +32,8 @@ export const GameHistory = ({ gameHistory }) => {
             </thead>
             <tbody>
                 {gameTable.map((it, index) => <tr key={index}>
-                    <td>{it.playerChoice}</td>
-                    <td>{it.skynetChoice}</td>
+                    <td>{choiceConverter(it.playerChoice)}</td>
+                    <td>{choiceConverter(it.skynetChoice)}</td>
                     <td>{it.outcome}</td>
                 </tr>
                 )}
