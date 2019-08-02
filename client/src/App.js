@@ -68,7 +68,6 @@ function App() {
   };
 
   const stats = currentHistory.stats;
-  console.log(gameStart);
 
   return <div className='wrapper'>
     {!gameStart ? <Button className='game__start' onClick={startGame}>Start Game</Button> : null}

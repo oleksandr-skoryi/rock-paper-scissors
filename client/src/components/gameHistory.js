@@ -34,7 +34,7 @@ export const GameHistory = ({ gameHistory }) => {
                 {gameTable.map((it, index) => <tr key={index}>
                     <td>{choiceConverter(it.playerChoice)}</td>
                     <td>{choiceConverter(it.skynetChoice)}</td>
-                    <td>{it.outcome}</td>
+                    <td>{it.outcome.toLowerCase()}</td>
                 </tr>
                 )}
             </tbody>

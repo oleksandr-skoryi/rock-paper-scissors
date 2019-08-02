@@ -9,7 +9,8 @@
     &_open {
         top: auto;
         bottom: 35px;
-        height: 75%;
+        height: calc(100% - 39px);
+        overflow-y: hidden;
     }
     &__table {
         width: 100%;
@@ -19,7 +20,9 @@
         }
         td {
             font-size: 22px;
+            text-transform: capitalize;
         }
+        padding-top: 5px;
     }
     &__table-open {
         background-color: #8D6A4C;
