@@ -34,12 +34,13 @@ public class PatternService {
             final int firstIndex = patternString.indexOf(lastChunk);
             final int lastIndex = patternString.lastIndexOf(lastChunk);
             if (firstIndex != lastIndex) {
-                return Optional.of(
-                        Choice.valueOf(
-                                String.valueOf(
-                                        patternString.charAt(firstIndex + i)
-                                )
+                final Choice choice = Choice.valueOf(
+                        String.valueOf(
+                                patternString.charAt(firstIndex + i)
                         )
+                );
+                return Optional.of(
+                        Choice.getEnemy(choice)
                 );
             }
         }
