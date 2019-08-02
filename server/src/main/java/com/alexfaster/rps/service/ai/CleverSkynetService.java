@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -23,12 +24,31 @@ public class CleverSkynetService implements AIBrainable {
 
     private final SkynetConfiguration skynetConfiguration;
     private final TurnHistoryRepository turnHistoryRepository;
+    private final PatternService patternService;
 
     @Override
     public Choice makeTurn(final Player player) {
+        final Long historySize = turnHistoryRepository.countByPlayer(player);
+        if (historySize == 0L) {
+            return doRandomChoice();
+        }
+        final List<Choice> patternChoices = prepareChoices(player, skynetConfiguration.getPatternLength());
+        final Optional<Choice> patternChoice = patternService.doPatternChoice(patternChoices);
+        if (patternChoice.isPresent()) {
+            return patternChoice.get();
+        }
+        final List<Choice> cleverChoices = prepareChoices(player, skynetConfiguration.getChainLength());
+        return doCleverChoice(cleverChoices);
+
+    }
+
+    private List<Choice> prepareChoices(
+            final Player player,
+            final int chainLength
+    ) {
         final Pageable page = PageRequest.of(
                 0,
-                skynetConfiguration.getChainLength(),
+                chainLength,
                 Sort.Direction.DESC,
                 "createdAt"
         );
@@ -41,11 +61,8 @@ public class CleverSkynetService implements AIBrainable {
                 .stream()
                 .map(TurnHistory::getPlayerChoice)
                 .collect(Collectors.toList());
-        if (playerChoices.isEmpty()) {
-            return doRandomChoice();
-        }
         Collections.reverse(playerChoices);
-        return doCleverChoice(playerChoices);
+        return playerChoices;
     }
 
     private Choice doRandomChoice() {

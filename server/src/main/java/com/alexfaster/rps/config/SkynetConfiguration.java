@@ -16,4 +16,13 @@ public class SkynetConfiguration {
     @Min(1)
     private Integer chainLength;
 
+    @Min(1)
+    private Integer patternLength;
+
+    @Min(1)
+    private Integer minChunkSize;
+
+    @Min(1)
+    private Integer maxChunkSize;
+
 }

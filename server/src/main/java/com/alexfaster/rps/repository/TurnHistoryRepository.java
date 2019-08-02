@@ -13,4 +13,6 @@ public interface TurnHistoryRepository extends JpaRepository<TurnHistory, Long> 
             final Player player,
             final Pageable page
     );
+
+    Long countByPlayer(final Player player);
 }

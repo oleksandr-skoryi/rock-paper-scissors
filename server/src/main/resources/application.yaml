@@ -3,6 +3,9 @@ server:
 
 skynet:
   chain-length: 10
+  pattern-length: 20
+  min-chunk-size: 5
+  max-chunk-size: 5
 
 spring:
   jpa:
